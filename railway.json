@@ -2,7 +2,7 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "curl -L https://archive.apache.org/dist/tomcat/tomcat-10/v10.1.25/bin/apache-tomcat-10.1.25.tar.gz -o tomcat.tar.gz && tar -xf tomcat.tar.gz && mv apache-tomcat-10.1.25 tomcat && rm tomcat.tar.gz && mv ROOT.war tomcat/webapps/"
+    "buildCommand": "curl -L https://archive.apache.org/dist/tomcat/tomcat-10/v10.1.25/bin/apache-tomcat-10.1.25.tar.gz -o tomcat.tar.gz && tar -xf tomcat.tar.gz && mv apache-tomcat-10.1.25 tomcat && rm tomcat.tar.gz && rm -rf tomcat/webapps/ROOT && mv ROOT.war tomcat/webapps/"
   },
   "deploy": {
     "startCommand": "chmod +x tomcat/bin/catalina.sh && sed -i 's/port=\"8080\"/port=\"'\"$PORT\"'\"/g' tomcat/conf/server.xml && ./tomcat/bin/catalina.sh run",
