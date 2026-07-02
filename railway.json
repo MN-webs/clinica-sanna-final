@@ -2,10 +2,10 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "echo 'Saltando compilacion de Maven'"
+    "buildCommand": "echo 'Preparando entorno web Java...'"
   },
   "deploy": {
-    "startCommand": "mkdir -p target/app && cd target/app && jar -xvf ../../ROOT.war && java -cp 'WEB-INF/classes:WEB-INF/lib/*' jakarta.servlet.http.HttpServlet || java -jar ../../ROOT.war",
+    "startCommand": "java -jar target/dependency/webapp-runner.jar ROOT.war || java -cp 'WEB-INF/classes:WEB-INF/lib/*' jakarta.servlet.http.HttpServlet || jar -xvf ROOT.war && java -jar target/app.jar",
     "restartPolicyType": "ON_FAILURE"
   }
 }
