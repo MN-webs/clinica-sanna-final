@@ -2,10 +2,10 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "mkdir -p target/dependency && curl -L https://repo1.maven.org/maven2/com/heroku/webapp-runner/9.0.52.1/webapp-runner-9.0.52.1.jar -o target/dependency/webapp-runner.jar"
+    "buildCommand": "curl -L https://archive.apache.org/dist/tomcat/tomcat-10/v10.1.25/bin/apache-tomcat-10.1.25.tar.gz -o tomcat.tar.gz && tar -xf tomcat.tar.gz && mv apache-tomcat-10.1.25 tomcat && rm tomcat.tar.gz && mv ROOT.war tomcat/webapps/"
   },
   "deploy": {
-    "startCommand": "java -jar target/dependency/webapp-runner.jar --port $PORT ROOT.war",
+    "startCommand": "chmod +x tomcat/bin/catalina.sh && sed -i 's/port=\"8080\"/port=\"'\"$PORT\"'\"/g' tomcat/conf/server.xml && ./tomcat/bin/catalina.sh run",
     "restartPolicyType": "ON_FAILURE"
   }
 }
